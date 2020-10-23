@@ -1,3 +1,7 @@
+![license](https://badgen.net/github/license/flavien-perier/dockerfile-owa)
+[![docker pulls](https://badgen.net/docker/pulls/flavienperier/owa)](https://hub.docker.com/r/flavienperier/owa)
+[![ci status](https://badgen.net/github/checks/flavien-perier/dockerfile-owa)](https://github.com/flavien-perier/dockerfile-owa)
+
 # Dockerfile OWA
 
 Dockerfile for [Open Web Analytics](http://www.openwebanalytics.com/).
