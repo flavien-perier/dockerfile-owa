@@ -1,10 +1,15 @@
-FROM php:7.4-rc-apache
+FROM php:8.3-rc-apache
 
-LABEL maintainer="Flavien PERIER <perier@flavien.io>" \
-      version="1.0.0" \
-      description="Open Web Analytics"
-
-ARG OWA_VERSION="1.7.1"
+LABEL org.opencontainers.image.title="OWA" \
+      org.opencontainers.image.description="Open Web Analytics" \
+      org.opencontainers.image.version="1.7.8" \
+      org.opencontainers.image.vendor="flavien.io" \
+      org.opencontainers.image.maintainer="Flavien PERIER <perier@flavien.io>" \
+      org.opencontainers.image.url="https://github.com/flavien-perier/dockerfile-owa" \
+      org.opencontainers.image.source="https://github.com/flavien-perier/dockerfile-owa" \
+      org.opencontainers.image.licenses="MIT"
+      
+ARG OWA_VERSION="1.7.8"
 
 ENV OWA_DB_TYPE="mysql" \
     OWA_DB_HOST="localhost:3306" \
@@ -20,7 +25,6 @@ ENV OWA_DB_TYPE="mysql" \
     OWA_LOG_PHP_ERRORS="false"
 
 ADD --chown=www-data:www-data https://github.com/Open-Web-Analytics/Open-Web-Analytics/releases/download/${OWA_VERSION}/owa_${OWA_VERSION}_packaged.tar /var/www/html/owa.tar
-COPY --chown=www-data:www-data owa-config.php /var/www/html/owa-config.php
 
 RUN apt-get update && \
     apt-get install -y libcurl4-openssl-dev zlib1g-dev libpng-dev libxml2-dev && \
@@ -29,3 +33,5 @@ RUN apt-get update && \
     rm -f /var/www/html/owa.tar && \
     rm -rf /var/lib/apt/lists/* && \
     chown -R www-data:www-data /var/www/html
+
+COPY --chown=www-data:www-data --chmod=400 owa-config.php /var/www/html/owa-config.php
